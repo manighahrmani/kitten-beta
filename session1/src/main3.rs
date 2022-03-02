@@ -8,8 +8,14 @@ fn main() {
   let mut input = String::new();
 
   match stdin().read_line(&mut input) {
-    Ok(_) => (),
-    Err(e) => println!("Error while reading your input: `{}`", e),
+    Ok(n) => {
+      println!("{} bytes was read from stdin.", n);
+      println!("Your input was: `{}`", input); // Ex: how to remove this trailing newline
+    }
+    Err(e) => {
+      println!("Error while reading your input.");
+      println!("Here is the error: `{}`", e); // Ex: how to trigger this error
+    }
   }
 
   let number_of_files: u32 = input
