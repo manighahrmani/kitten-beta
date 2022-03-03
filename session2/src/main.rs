@@ -18,5 +18,16 @@ fn main() {
     .parse()
     .expect("Your input could not be turned into a number!");
 
-  println!("{} needs to open {} file(s).", KITTEN, number_of_files)
+  println!("{} needs to open {} file(s).", KITTEN, number_of_files);
+
+  println!("What is the name of the file?");
+
+  input = String::new();
+
+  match stdin().read_line(&mut input) {
+    Ok(_) => (),
+    Err(e) => println!("Error while reading your input: `{}`", e),
+  }
+
+  println!("{} needs to open this file: {}", KITTEN, input);
 }

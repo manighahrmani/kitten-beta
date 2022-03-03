@@ -18,6 +18,15 @@ fn main() {
     }
   }
 
+  // let number_of_files = match input.trim().parse::<i32>(){
+  //   Ok(n) = n,
+  //   Err(e) => {
+  //     println!("Error while reading your input: `{}`", e);
+  //     println!("Will set number_of_files to (-1).");
+  //     -1
+  //   },
+  // };
+
   let number_of_files: u32 = input
     .trim()
     .parse()
