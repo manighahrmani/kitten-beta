@@ -8,7 +8,10 @@ fn main() {
 
   let mut input = String::new();
 
-  input = read_user_input(input);
+  match stdin().read_line(&mut input) {
+    Ok(_) => (),
+    Err(e) => println!("Error while reading your input: `{}`", e),
+  }
 
   let number_of_files: u32 = input
     .trim()
@@ -19,17 +22,12 @@ fn main() {
 
   println!("What is the name of the file?");
 
-  input = read_user_input(input);
+  input = String::new();
 
-  println!("{} needs to open this file: {}", KITTEN, input);
-}
-
-fn read_user_input(mut input: String) -> String {
-  input.clear(); // Ex: Why do we need this?
   match stdin().read_line(&mut input) {
     Ok(_) => (),
     Err(e) => println!("Error while reading your input: `{}`", e),
   }
-  // Ex: why &input would not work
-  input
+
+  println!("{} needs to open this file: {}", KITTEN, input);
 }
