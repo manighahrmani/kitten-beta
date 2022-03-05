@@ -4,9 +4,7 @@ fn main() {
   println!("Welcome to Kitten! 🐱");
 
   println!("How many files do you want to open?");
-
   let mut input = String::new();
-
   match stdin().read_line(&mut input) {
     Ok(n) => {
       println!("{} bytes was read from stdin.", n);
@@ -17,6 +15,9 @@ fn main() {
       println!("Here is the error: `{}`", e); // Ex: how to trigger this error
     }
   }
+  // stdin()
+  //   .read_line(&mut input)
+  //   .expect("Error while reading your input!");
 
   // let number_of_files = match input.trim().parse::<i32>(){
   //   Ok(n) = n,
@@ -26,11 +27,10 @@ fn main() {
   //     -1
   //   },
   // };
-
   let number_of_files: u32 = input
     .trim()
     .parse()
-    .expect("Your input could not be turned into a number!");
+    .expect("Error while turning your input into a number!");
 
   println!("🐱 needs to open {} file(s).", number_of_files)
 }
