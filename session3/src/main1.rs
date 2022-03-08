@@ -1,8 +1,4 @@
-use std::{
-  error::Error,
-  fs,
-  io::{self, stdin},
-};
+use std::{fs, io::stdin};
 
 fn main() {
   const KITTEN: &str = "🐱";
@@ -21,6 +17,10 @@ fn main() {
 
   let mut counter = 0;
 
+  // loop {
+  //   if counter == number_of_files {
+  //     break;
+  //   }
   while counter != 0 {
     let mut filename = String::new();
 
@@ -35,12 +35,6 @@ fn main() {
 
     counter += 1;
   }
-
-  let mut new_input = String::new();
-  match read_user_input_0(&mut new_input) {
-    Ok(_) => println!("Read with success.\nNewInput is {}", new_input),
-    Err(e) => println!("Encountered the follwoing Error:\n{}", e),
-  }
 }
 
 fn read_user_input(input: &mut String) {
@@ -50,18 +44,4 @@ fn read_user_input(input: &mut String) {
     Err(e) => println!("Error while reading your input: `{}`", e),
     // input will be empty, error must be handled
   }
-}
-
-fn read_user_input_0(input: &mut String) -> Result<(), io::Error> {
-  input.clear();
-  match stdin().read_line(input) {
-    Ok(_) => Ok(()),
-    Err(e) => Err(e),
-  }
-}
-fn _read_user_input_1(input: &mut String) -> Result<(), Box<dyn Error>> {
-  input.clear();
-  stdin().read_line(input)?;
-
-  Ok(())
 }
