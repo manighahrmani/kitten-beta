@@ -29,6 +29,7 @@ fn main() {
   println!("{} needs to open this file: {}", KITTEN, input);
   // Ex: Run without, why do we need this? Try putting brackets in above print
   input.pop();
+  // Alternatively can do: input = input.trim();
 
   // See files in cwd, place txt file in correct place
   // println!("Files in cwd are:");
