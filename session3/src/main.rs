@@ -41,6 +41,7 @@ fn main() {
     Ok(_) => println!("Read with success.\nNewInput is {}", new_input),
     Err(e) => println!("Encountered the follwoing Error:\n{}", e),
   }
+  // TODO: Reading from https://stackoverflow.com/questions/42917566/what-is-this-question-mark-operator-about
 }
 
 fn read_user_input(input: &mut String) {
