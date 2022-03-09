@@ -12,7 +12,7 @@ fn main() {
     }
     Err(e) => {
       println!("Error while reading your input.");
-      println!("Here is the error: `{}`", e); // Ex: how to trigger this error
+      println!("Here is the error: `{}`", e); // Ex: how to trigger this error? (Redirecting stdin)
     }
   }
   // stdin()

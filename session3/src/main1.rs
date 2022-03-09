@@ -21,10 +21,9 @@ fn main() {
   //   if counter == number_of_files {
   //     break;
   //   }
-  while counter != 0 {
-    let mut filename = String::new();
-
+  while counter != number_of_files {
     println!("What is the name of the file?");
+    let mut filename = String::new();
     read_user_input(&mut filename);
     filename.pop();
 
