@@ -1,7 +1,8 @@
 use std::io::stdin;
 
 fn main() {
-  println!("Welcome to Kitten! 🐱");
+  const KITTEN: &str = "🐱";
+  println!("Welcome to Kitten! {}", KITTEN);
 
   println!("How many files do you want to open?");
   let mut input = String::new();
@@ -15,5 +16,5 @@ fn main() {
     .parse()
     .expect("Error while turning your input into a number!");
 
-  println!("🐱 needs to open {} file(s).", number_of_files)
+  println!("{} needs to open {} file(s).", KITTEN, number_of_files)
 }

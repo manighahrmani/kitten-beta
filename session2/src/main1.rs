@@ -1,3 +1,4 @@
+use std::fs;
 use std::io::stdin;
 
 fn main() {
@@ -16,5 +17,14 @@ fn main() {
     .parse()
     .expect("Error while turning your input into a number!");
 
-  println!("{} needs to open {} file(s).", KITTEN, number_of_files)
+  println!("{} needs to open {} file(s).", KITTEN, number_of_files);
+
+  println!("What is the name of the file?");
+  let mut file_name = String::new();
+  match stdin().read_line(&mut file_name) {
+    Ok(_) => (),
+    Err(e) => println!("Error while reading your input: `{}`", e),
+  }
+
+  println!("{} needs to open this file: {}", KITTEN, file_name);
 }

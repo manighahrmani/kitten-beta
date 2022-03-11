@@ -2,7 +2,8 @@ use std::io::stdin;
 // use std::io;
 
 fn main() {
-  println!("Welcome to Kitten! 🐱");
+  const KITTEN: &str = "🐱";
+  println!("Welcome to Kitten! {}", KITTEN);
 
   println!("How many files do you want to open?");
   // let mut input: String = String::new();
@@ -21,5 +22,5 @@ fn main() {
   }
 
   let number_of_files: u32 = 1;
-  println!("🐱 needs to open {} file(s).", number_of_files)
+  println!("{} needs to open {} file(s).", kitten, number_of_files)
 }

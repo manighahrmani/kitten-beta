@@ -27,9 +27,9 @@ fn main() {
   }
 
   println!("{} needs to open this file: {}", KITTEN, file_name);
-  // Ex: Run without, why do we need this? Try putting brackets in above print
-  file_name.pop();
-  // Alternatively can do: file_name = file_name.trim();
+  // Ex: Run without, why do we need the next line?
+  // Try putting brackets around filename in above print.
+  file_name.pop(); // or file_name = file_name.trim();
 
   // See files in cwd, place txt file in correct place
   // println!("Files in cwd are:");

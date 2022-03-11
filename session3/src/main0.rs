@@ -31,6 +31,5 @@ fn read_user_input(input: &mut String) {
   match stdin().read_line(input) {
     Ok(_) => (),
     Err(e) => println!("Error while reading your input: `{}`", e),
-    // input will be empty, error must be handled
   }
 }
