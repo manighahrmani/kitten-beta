@@ -44,6 +44,7 @@ fn main() {
 }
 
 /// Reads a word from standard input, at the moment it can read multiple words!
+/// TODO: https://users.rust-lang.org/t/how-to-split-a-string-by-and-then-print-first-or-last-component/23042
 fn read_user_input(input: &mut String) -> Result<(), std::io::Error> {
   input.clear();
   stdin().read_line(input)?;
