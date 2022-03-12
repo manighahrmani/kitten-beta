@@ -13,6 +13,7 @@ fn main() {
   });
 
   // TODO: #2 Can this and get another word be in separate functions?
+  // TODO: #3 Also read_user_input shound only take 1 word.
   let number_of_files: u32 = input.parse().unwrap_or_else(|e| {
     println!("Error while turning your input into a number: {}", e);
     println!("Will default to 1 on this occasion.");
