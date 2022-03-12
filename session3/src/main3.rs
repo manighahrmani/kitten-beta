@@ -12,12 +12,12 @@ fn main() {
     process::exit(1)
   });
 
+  // TODO: #2 Can this and get another word be in separate functions?
   let number_of_files: u32 = input.parse().unwrap_or_else(|e| {
     println!("Error while turning your input into a number: {}", e);
     println!("Will default to 1 on this occasion.");
     1
   });
-  // .trim() // Changed read_user_input function to cover this
 
   println!("{} needs to open {} file(s).", KITTEN, number_of_files);
 
@@ -33,9 +33,14 @@ fn main() {
 
     println!("{} needs to open this file: {}", KITTEN, filename);
 
+    // let contents = fs::read_to_string(filename).unwrap_or_else(|e| {
+    //   eprintln!("Error while reading the file: {}", e);
+    //   process::exit(1)
+    // });
     let contents = fs::read_to_string(filename).unwrap_or_else(|e| {
-      eprintln!("Error while reading the file: {}", e);
-      process::exit(1)
+      println!("Error while reading the file: {}", e);
+      println!("Its content will be set to some dummy text.");
+      String::from("This is some dummy text. 🤕\n")
     });
     println!("The file has the following content:\n{}", contents);
 
@@ -44,7 +49,6 @@ fn main() {
 }
 
 /// Reads a word from standard input, at the moment it can read multiple words!
-/// TODO: https://users.rust-lang.org/t/how-to-split-a-string-by-and-then-print-first-or-last-component/23042
 fn read_user_input(input: &mut String) -> Result<(), std::io::Error> {
   input.clear();
   stdin().read_line(input)?;

@@ -19,7 +19,7 @@ fn main() {
 
   // loop {
   //   if counter == number_of_files {
-  //     break;
+  //     break; 
   //   }
   while counter != number_of_files {
     println!("What is the name of the file?");

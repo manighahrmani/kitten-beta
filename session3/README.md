@@ -16,8 +16,8 @@ cargo run
 ## Topics Covered
 
 1. Control Flow
-2. Panicking and Recovering From Errors
-3. 
+2. Panicking on Errors
+3. Recovering From Errors
 
 ## References and Further Reading
 
