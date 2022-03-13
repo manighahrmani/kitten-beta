@@ -19,7 +19,6 @@ fn main() {
   println!("{} needs to open {} file(s).", KITTEN, number_of_files);
 
   let mut counter = 0;
-
   while counter != number_of_files {
     println!("What is the name of the file?");
     let mut filename = String::new();
@@ -38,13 +37,11 @@ fn main() {
   }
 }
 
-fn _read_user_input_0(input: &mut String) {
+fn read_user_input_2(input: &mut String) -> Result<(), std::io::Error> {
   input.clear();
-  match stdin().read_line(input) {
-    Ok(_) => (),
-    Err(e) => println!("Error while reading your input: `{}`", e),
-    // input will be empty, error must be handled
-  }
+  stdin().read_line(input)?;
+  input.pop();
+  Ok(())
 }
 
 fn _read_user_input_1(input: &mut String) -> Result<(), std::io::Error> {
@@ -55,9 +52,11 @@ fn _read_user_input_1(input: &mut String) -> Result<(), std::io::Error> {
   }
 }
 
-fn read_user_input_2(input: &mut String) -> Result<(), std::io::Error> {
+fn _read_user_input_0(input: &mut String) {
   input.clear();
-  stdin().read_line(input)?;
-  input.pop();
-  Ok(())
+  match stdin().read_line(input) {
+    Ok(_) => (),
+    Err(e) => println!("Error while reading your input: `{}`", e),
+    // input will be empty, error must be handled
+  }
 }

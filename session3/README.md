@@ -15,10 +15,11 @@ cargo run
 
 ## Topics Covered
 
-1. Control Flow
-2. Panicking on Errors
-3. Recovering From Errors
+1. Control Flow (Match)
+2. Panicking and Recovering On Errors
+3. Collections
+4. Functional Programming Intro (Closures, Iterators)
 
 ## References and Further Reading
 
-[Chapters ... From The Rust Programming Language Book](https://doc.rust-lang.org/book/title-page.html "The Rust Programming Language Book")
+[Chapters 3,6,8,9,12 From The Rust Programming Language Book](https://doc.rust-lang.org/book/title-page.html "The Rust Programming Language Book")

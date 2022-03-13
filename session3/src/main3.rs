@@ -6,14 +6,12 @@ fn main() {
 
   println!("How many files do you want to open?");
   let mut input = String::new();
-  // read_user_input(&mut input).expect("Error while reading your input!");
-  read_user_input(&mut input).unwrap_or_else(|e| {
+  // read_user_word_2(&mut input).expect("Error while reading your input!");
+  read_user_word_2(&mut input).unwrap_or_else(|e| {
     eprintln!("Error while reading your input: {}", e);
     process::exit(1)
   });
 
-  // TODO: #2 Can this and get another word be in separate functions?
-  // TODO: #3 Also read_user_input shound only take 1 word.
   let number_of_files: u32 = input.parse().unwrap_or_else(|e| {
     println!("Error while turning your input into a number: {}", e);
     println!("Will default to 1 on this occasion.");
@@ -23,11 +21,10 @@ fn main() {
   println!("{} needs to open {} file(s).", KITTEN, number_of_files);
 
   let mut counter = 0;
-
   while counter != number_of_files {
     println!("What is the name of the file?");
     let mut filename = String::new();
-    read_user_input(&mut filename).unwrap_or_else(|e| {
+    read_user_word_2(&mut filename).unwrap_or_else(|e| {
       eprintln!("Error while reading your input: {}", e);
       process::exit(1)
     });
@@ -46,6 +43,38 @@ fn main() {
     println!("The file has the following content:\n{}", contents);
 
     counter += 1;
+  }
+}
+
+fn read_user_word_2(input: &mut String) -> Result<(), std::io::Error> {
+  read_user_input(input)?; // returns the error from read_user_input
+  *input = String::from(input.split(" ").next().unwrap_or_else(|| input)); // or .unwrap_or(input)
+  Ok(())
+}
+
+fn _read_user_word_1(input: &mut String) -> Result<(), std::io::Error> {
+  read_user_input(input).unwrap(); // panics, we want to return error instead
+  let words: Vec<&str> = input.split(" ").collect();
+  *input = words[0].to_string();
+  Ok(())
+}
+
+// Maybe mention: Performance diff https://doc.rust-lang.org/book/ch13-04-performance.html
+fn _read_user_word_0(input: &mut String) -> Result<(), std::io::Error> {
+  match read_user_input(input) {
+    Ok(()) => {
+      // let words: Vec<&Strin> = input.split(" ").collect();
+      let mut words = input.split(" ");
+      // for word in &words {
+      //   println!("- {}", word);
+      // }
+      match words.next() {
+        Some(s) => *input = String::from(s),
+        None => (),
+      };
+      Ok(())
+    }
+    Err(e) => Err(e),
   }
 }
 
