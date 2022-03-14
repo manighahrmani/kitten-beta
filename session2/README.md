@@ -19,7 +19,8 @@ cargo run
 2. Functions
 3. Ownership
 4. Control Flow (Loops)
+5. String Operations
 
 ## References and Further Reading
 
-[Chapters 3 and 4 From The Rust Programming Language Book](https://doc.rust-lang.org/book/title-page.html "The Rust Programming Language Book")
+[Chapters 3, 4 and 8 From The Rust Programming Language Book](https://doc.rust-lang.org/book/title-page.html "The Rust Programming Language Book")

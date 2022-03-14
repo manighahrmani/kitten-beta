@@ -1,4 +1,4 @@
-# Session 2
+# Session 3
 
 This is the code for the third session.
 TODO: #1 List files and brief description for each.
