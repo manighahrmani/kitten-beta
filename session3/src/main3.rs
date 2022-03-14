@@ -5,80 +5,87 @@ fn main() {
   println!("Welcome to Kitten! {}", KITTEN);
 
   println!("How many files do you want to open?");
-  let mut input = String::new();
-  // read_user_word_2(&mut input).expect("Error while reading your input!");
-  read_user_word_2(&mut input).unwrap_or_else(|e| {
-    eprintln!("Error while reading your input: {}", e);
-    process::exit(1)
-  });
-
-  let number_of_files: u32 = input.parse().unwrap_or_else(|e| {
-    println!("Error while turning your input into a number: {}", e);
-    println!("Will default to 1 on this occasion.");
-    1
-  });
+  let number_of_files: u32 =
+    read_user_number_2(1).unwrap_or_else(|e| eprintln!("Error while reading your input: {}", e));
 
   println!("{} needs to open {} file(s).", KITTEN, number_of_files);
 
+  let mut output = String::new();
   let mut counter = 0;
+
   while counter != number_of_files {
     println!("What is the name of the file?");
     let mut filename = String::new();
-    read_user_word_2(&mut filename).unwrap_or_else(|e| {
+    read_user_word(&mut filename).unwrap_or_else(|e| {
       eprintln!("Error while reading your input: {}", e);
       process::exit(1)
     });
 
-    println!("{} needs to open this file: {}", KITTEN, filename);
-
-    // let contents = fs::read_to_string(filename).unwrap_or_else(|e| {
-    //   eprintln!("Error while reading the file: {}", e);
-    //   process::exit(1)
-    // });
-    let contents = fs::read_to_string(filename).unwrap_or_else(|e| {
-      println!("Error while reading the file: {}", e);
+    let contents = fs::read_to_string(filename.clone()).unwrap_or_else(|e| {
+      println!("Error while reading {}: {}", filename, e);
       println!("Its content will be set to some dummy text.");
       String::from("This is some dummy text. 🤕\n")
     });
-    println!("The file has the following content:\n{}", contents);
+    output.push_str(&contents);
 
     counter += 1;
   }
+
+  println!("The output of {} is:\n{}", KITTEN, output);
 }
 
-fn read_user_word_2(input: &mut String) -> Result<(), std::io::Error> {
-  read_user_input(input)?; // returns the error from read_user_input
-  *input = String::from(input.split(" ").next().unwrap_or_else(|| input)); // or .unwrap_or(input)
-  Ok(())
+// Reads a single number from standard input, returns default on error
+fn read_user_number_2(default: u32) -> Result<u32, std::io::Error> {
+  let mut input = String::new();
+  read_user_word(&mut input)?;
+  let mut number: u32 = input.parse().unwrap_or_else(|e| {
+    println!("Error while turning your input into a number: {}", e);
+    println!("Will default to {} on this occasion.", default);
+    default
+  });
+  Ok(number)
 }
 
-fn _read_user_word_1(input: &mut String) -> Result<(), std::io::Error> {
-  read_user_input(input).unwrap(); // panics, we want to return error instead
-  let words: Vec<&str> = input.split(" ").collect();
-  *input = words[0].to_string();
-  Ok(())
-}
-
-// Maybe mention: Performance diff https://doc.rust-lang.org/book/ch13-04-performance.html
-fn _read_user_word_0(input: &mut String) -> Result<(), std::io::Error> {
-  match read_user_input(input) {
+fn read_use_number_1(default: u32) -> Result<u32, std::io::Error> {
+  let mut input = String::new();
+  match read_user_word(&mut input) {
     Ok(()) => {
-      // let words: Vec<&Strin> = input.split(" ").collect();
-      let mut words = input.split(" ");
-      // for word in &words {
-      //   println!("- {}", word);
-      // }
-      match words.next() {
-        Some(s) => *input = String::from(s),
-        None => (),
-      };
-      Ok(())
+      let mut number: u32 = input.parse().unwrap_or_else(|e| {
+        println!("Error while turning your input into a number: {}", e);
+        println!("Will default to {} on this occasion.", default);
+        default
+      });
+      Ok(number)
     }
     Err(e) => Err(e),
   }
 }
 
-/// Reads a word from standard input, at the moment it can read multiple words!
+fn _read_use_number_0(default: u32) -> u32 {
+  let mut input = String::new();
+  let number = match read_user_word(&mut input) {
+    Ok(()) => input.parse().unwrap_or_else(|e| {
+      println!("Error while turning your input into a number: {}", e);
+      println!("Will default to {} on this occasion.", default);
+      default
+    }),
+    Err(e) => {
+      println!("Error while reading your input: {}", e);
+      println!("Will default to {} on this occasion.", default);
+      default
+    }
+  };
+  number
+}
+
+// Reads a single word from standard input
+fn read_user_word(input: &mut String) -> Result<(), std::io::Error> {
+  read_user_input(input)?; // returns the error from read_user_input
+  *input = String::from(input.split(" ").next().unwrap_or_else(|| input)); // or .unwrap_or(input)
+  Ok(())
+}
+
+/// Reads a word from standard input
 fn read_user_input(input: &mut String) -> Result<(), std::io::Error> {
   input.clear();
   stdin().read_line(input)?;

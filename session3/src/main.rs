@@ -12,7 +12,9 @@ fn main() {
 
   println!("{} needs to open {} file(s).", KITTEN, number_of_files);
 
+  let mut output = String::new();
   let mut counter = 0;
+
   while counter != number_of_files {
     println!("What is the name of the file?");
     let mut filename = String::new();
@@ -21,17 +23,17 @@ fn main() {
       process::exit(1)
     });
 
-    println!("{} needs to open this file: {}", KITTEN, filename);
-
-    let contents = fs::read_to_string(filename).unwrap_or_else(|e| {
-      println!("Error while reading the file: {}", e);
+    let contents = fs::read_to_string(filename.clone()).unwrap_or_else(|e| {
+      println!("Error while reading {}: {}", filename, e);
       println!("Its content will be set to some dummy text.");
       String::from("This is some dummy text. 🤕\n")
     });
-    println!("The file has the following content:\n{}", contents);
+    output.push_str(&contents);
 
     counter += 1;
   }
+
+  println!("The output of {} is:\n{}", KITTEN, output);
 }
 
 // Reads a single number from standard input, returns default on error

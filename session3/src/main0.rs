@@ -15,15 +15,22 @@ fn main() {
 
   println!("{} needs to open {} file(s).", KITTEN, number_of_files);
 
-  println!("What is the name of the file?");
-  let mut file_name = String::new();
-  read_user_input(&mut file_name);
-  file_name.pop();
+  let mut output = String::new();
+  let mut counter = 0;
 
-  println!("{} needs to open this file: {}", KITTEN, file_name);
+  while counter != number_of_files {
+    println!("What is the name of the file?");
+    let mut filename = String::new();
+    read_user_input(&mut filename);
+    filename.pop();
 
-  let contents = fs::read_to_string(file_name).expect("Error while reading the file");
-  println!("The file has the following content:\n{}", contents);
+    let contents = fs::read_to_string(filename).expect("Error while reading the file");
+    output.push_str(&contents);
+
+    counter += 1;
+  }
+
+  println!("The output of {} is:\n{}", KITTEN, output);
 }
 
 fn read_user_input(input: &mut String) {
