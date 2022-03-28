@@ -62,6 +62,16 @@ fn read_user_word(input: &mut String) -> Result<(), std::io::Error> {
   Ok(())
 }
 
+// Get the first word from a string
+fn _get_first_word(s: &str) -> &str {
+  for (i, c) in s.chars().enumerate() {
+    if c == ' ' {
+      return &s[0..i];
+    }
+  }
+  &s[..]
+}
+
 /// Reads a word from standard input
 fn read_user_input(input: &mut String) -> Result<(), std::io::Error> {
   input.clear();
